@@ -1,0 +1,9 @@
+### Graph DB란
+* Graph Data model에서 CRUD작업을 수행하는 DBMS이다.
+* OLTP(Online Transaction Processing)시스템의 일부.
+    * OLTP란 데이터 갱신 위주로 네트워크 상의 여러 이용자가 실시간으로 DB의 데이터를 갱신하거나 조회하는 등의 단위작업을 뜻한다.
+    * OLAP(Online Analytic Processing)데이터 조회위주는 정보 위주의 처리 분석을 의미하며 의사결정에 활용할 수 있는 정보를 얻을 수 있게 해 주는 기술이다.
+        * GraphDB는 OLTP시스템의 일부이기 때문에 트랜잭션 성능에 최적화되고, 이의 무결성과 가용성을 고려하여 설계된다.
+* GraphDB는 ralationship을 가장 중요시한다.
+    * 외래키/MapReduce같은 방법을 사용하여 데이터 연결을 유추할 필요가 없다.
+    * Nodes와 Relationship을 추상화하여 조합함으로서 data model구축
