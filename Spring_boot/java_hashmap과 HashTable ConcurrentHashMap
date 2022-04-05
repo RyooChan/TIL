@@ -1,0 +1,63 @@
+# HashMap의 Thread-Safe이슈와 HashTable, ConcurrentHashMap
+
+## Thread-Safe란?
+
+Thread-Safe란, 멀티 스레드 프로그램에서 어떤 객체나 함수 등이 여러 스레드로부터 동시에 접근이 이루어져도 문제 없이 실행이 가능한 것이다.  
+동기화(Synchronize)라고도 표현하며, 여러 쓰레드에서 작업이 이루어져도 데이터의 정합성이 유지되는 것이다.
+
+## 멀티 스레드가 뭔데??
+
+먼저 스레드란 프로세스 내에서 일을 처리하는 세부실행 단위를 뜻한다.  
+그렇다면 멀티 스레드란, 하나의 프로세스를 여러 개의 스레드로 나누어 수행해주는 것이다.  
+즉, 하나의 프로그램이 여러 작업을 동시에 수행할 수 있도록 해주는 것이며 이를 통해 수행 능력을 향상시켜 주는 개념이다.
+
+## HashMap에서 Thread-safe할까?
+
+당연히 HashMap이 Thread-safe하다면 이 글을 작성하지 않았을 것이다.
+
+HashMap의 경우, 여러 Thread에서 액세스하여 구조를 변경하는 경우(put, remove 등) 데이터의 정합성이 유지되지 않기 때문이다.
+
+그렇기 때문에 멀티쓰레드환경에서 HashMap을 사용하는 경우 동기화된 블록에서 코드를 작성하는 등 조치를 취해야 하는데, 이 경우 교착 상태가 발생할 가능성이 크다.
+
+## 그럼 뭘로 바꿔야하나??
+
+일단 두 가지 Map을 제안한다.
+
+-   HashTable
+-   ConcurrentHashMap
+
+### HashTable
+
+HashTable의 경우 HashMap과는 다르게 동기화를 보장해 준다.  
+HashMap과 거의 유사하지만, HashTable의 구현부를 확인해 보면 synchronized라는 내용이 작성되어 있다.  
+이는 데이터의 여러 작업을(get포함) 실행할 때에 다른 쓰레드의 작업을 block하여 thread-safe를 유지시킨다.
+
+-   장점
+    -   일단 장점은 당연히 Thread-safe하다는 것이다. HashMap에서 발생 가능한 문제를 해결해 준다.
+-   단점
+    -   HashTable의 경우, 작업 도중 block을 걸게 된다. 이는 한 쓰레드에서 작업중인 경우 다른 곳에서의 작업이 차단된다는 것으로 당연히 속도 이슈가 생기게 된다.
+        -   그리고 이렇게 작업하는 내내 다른 쓰레드에서의 접근을 막은면 멀티 쓰레드의 장점이 많이 퇴색하게 된다...
+
+HashTable과 HashMap의 차이 중 또 다른 하나는 HashTable의 key와 value값에는 null을 넣을 수 없다는 것이다.
+
+### ConcurrentHashMap
+
+위에서 설명한 HashTable의 경우는 동기화 시 Map전체에 block을 걸게 된다.  
+ConcurrentHashMap을 사용하는 경우는 이와는 다르게 한 Map내에서 사용하는 부분을 여러 segment로 쪼개서 일부에만 block을 걸어 준다.  
+즉 객체 전체에 block을 거는 HashTable과 달리 Segment단위의 block을 걸어 준다.
+
+-   장점
+    -   HashTable에 비해 빠르다.
+        -   HashTable에서 A가 작업을 수행하는 동안 B, C, D는 모두 접근하지 못한다.
+        -   ConcurrentHashMap에서는 A가 데이터를 읽는 동안 B는 데이터를 추가하고, 만약 C가 B와 동일한 데이터를 변경하려 하면 block하는 등 segment의 이용별로 block을 해 주어 HashTable에 비해 속도가 느려질 염려가 없다.
+
+ConcurrentHashMap도 key와 value값에는 null이 들어갈 수 없다.
+
+## 결론
+
+간단히 말해서...  
+당연하지만 HashMap의 속도가 가장 빠르다 그러므로
+
+**단일 쓰레드일때는 HashMap을 쓰고**  
+**멀티 쓰레드일때는 ConcurrentHashMap 쓰자**  
+**HashTable은 걍 쓰지말자~**
