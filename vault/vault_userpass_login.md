@@ -71,7 +71,7 @@ policy의 경우 이전에 만들어두었던 aaa_oracle_read를 그대로 써�
 ```
 vault login -method=userpass \
 username=ryoochan \
-password=good
+password=handsome
 ```
 
 #### 결과
