@@ -53,21 +53,16 @@
 한번 [여기](https://hello-backend.tistory.com/212)에서 기본 설명이랑 propagation을 보고 오자.
 propagation에서 REQUIRED가 기본 설정으로 되어 있다.
 
-여기서 중요한 점은
+이 REQUIRED는 상위 트랜잭션을 살펴보고, 부모 트랜잭션이 있으면 거기 참여하고 없으면 새로 생성하는 로직이다.
 
-* 현재 활성화된 트랜잭션이 있으면 그 안에서 실행
-
-이라는 설명이다.
-이를 보고 다시 한번 살펴보자.
+근데 한가지 추가사항은 바로 **Bean객체 내에서 내부 함수를 호출하면 Transaction 어노테이션을 실행하지 않는다**는 점이다.
 
 ## saveAll은 그니까
 
 * 최초에 Transactional 어노테이션 실행
     * AOP를 통해 전체 값들의 ACID를 보장하는 proxy 객체 생성!
 * 해당 함수 내에서 save함수 실행
-    * save함수의 Transactional 어노테이션 실행
-        * 어? 근데 부모 Transactional이 있네?
-            * 그럼 그냥 여기서 따로 안만들고 함수를 실행하면 되겠다.
+    * save함수의 Transactional 어노테이션은 아예 타지 않는다
 * save함수 로직만 실행
 
 이렇게 된다.
@@ -78,24 +73,26 @@ propagation에서 REQUIRED가 기본 설정으로 되어 있다.
 
 * save실행
     * 여기서 Transactional 어노테이션 실행
-        * 부모 Transactional이 없네?
-            * 하나 만들자
+        * propagation 옵션을 통한 추가옵션 수행
+            * 이후 save로직 수행
 * 다음 for문에서 save 실행
-    * 얘는 다른곳에서 돌아감
-        * 부모 Transactional이 없네?
-            * 하나 만들자
+    * 또 servive에서 bean객체내의 save메서드 호출
+        * Transactional 어노테이션 실행
+            * 끼요오옷
 * 계속 이렇게 간다.
 
 이런식으로 진행된다.
 
 ## 그럼 비교하자면
 
-* saveAll은 부모 트랜잭션 내에서 save함수의 로직만 실행
-* save의 경우는 매번 트랜잭션까지 AOP해서 proxy계속 만듬
+* saveAll은 동일 bean객체(둘다 repository내에 구현되어싰음)내에서 save함수의 로직만 실행
+* save의 경우는 외부 bean이 AOP로 돌아가서 매번 transactional 어노테이션의 기능 확인
 
 이렇데 된다.
 
 ## 따라서
 
-save를 계속 해주는 경우는, 속도도 느려지고 리소스도 낭비된다.
-그니까 여러 값을 해줄때에는 saveAll을 쓰자!
+saveAll()을 사용하면 여러번 트랜잭셔널 확인 없이 동작해서 시간낭비를 줄일수 있다!!
+라는 것.
+
+그니까 다수의 insert진행시 saveAll()을 쓰자구요
