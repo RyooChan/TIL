@@ -105,7 +105,8 @@ class TestServiceTest {
 
 ### 테스트 결과
 
-![](https://hackmd.io/_uploads/S10JWnGSh.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/0e3b33d0-ef0c-4333-b393-1b1010a03925)
+
 
 이렇게 나온다.
 왜인지 모르겠는데, 캐싱이 계속 없다.
@@ -173,7 +174,10 @@ public class TestService {
 
 이런 식으로 하는 것인데, 저기 `AopContext.currntProxy()` 메서드를 보면
 
-![](https://hackmd.io/_uploads/BJHT43fBn.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/158dd2c3-fa4b-45fa-a742-0bf0b779811f)
+
+
+
 
 이렇게 나온다.
 위에 보면 해당 메서드를 통해 Aop Proxy를 반환할 수 있다고 적혀 있다.
@@ -188,14 +192,15 @@ public class TestService {
 얘를 써주면 된다.
 이것도 내부를 보면
 
-![](https://hackmd.io/_uploads/r1bx82frn.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/aa6e53f3-e94d-4fed-8b8d-8643e3aef5fc)
+
 
 요렇게 되어 있다.
 AOP 프레임워크에 의해 스레드로컬로 노출되어야 함을 나타내는 것으로, 이걸 true로 해주면 노출되게 될 것이다.
 
 그래서 이제 한번 시행해 보면
 
-![](https://hackmd.io/_uploads/Bkyu83GBh.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/f235206c-1b6e-4a98-8100-106c44c009d7)
 
 이렇게 캐싱이 잘 동작함을 확인 가능하다!!!
 
@@ -296,7 +301,7 @@ public class TestService {
 
 테스트 해보면
 
-![](https://hackmd.io/_uploads/H1E152Mr2.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/25d6ea25-f485-47c4-b4bf-2ec88452ceea)
 
 이렇게 잘 나온다.
 
