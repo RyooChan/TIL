@@ -18,7 +18,7 @@
 
 ### Table
 
-![](https://hackmd.io/_uploads/HkLAImzw2.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/fcad0ff0-05d6-4385-ac96-dd207aa76ef6)
 
 먼저 `human` 테이블에 다음과 같은 데이터가 있다.
 
@@ -35,7 +35,7 @@ START TRANSACTION;
 SELECT * FROM human WHERE no=1 FOR UPDATE;
 ```
 
-![](https://hackmd.io/_uploads/SJ6HvQfvh.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/6e5e8129-9bf1-4d4c-9009-28fcf9e971ab)
 
 수행하면 일단 SELECT의 결과로 다음의 데이터가 출력되고, 현재 `commit`되지는 않았으므로 트랜잭션은 계속 돌고 있을 것이다.
 
@@ -49,7 +49,7 @@ START TRANSACTION;
 SELECT * FROM human WHERE no=1 FOR UPDATE;
 ```
 
-![](https://hackmd.io/_uploads/HktFcQzwh.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/35764063-49fc-4f25-b836-f8e4ab602d58)
 
 엥?? 왠지 수행이 안된다!!
 
@@ -61,7 +61,7 @@ SELECT * FROM human WHERE no=1 FOR UPDATE;
 SELECT * FROM human WHERE no=1;
 ```
 
-![](https://hackmd.io/_uploads/B1p7i7GDn.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/9cbf0af3-3fab-4c26-b96c-c32d4c5e0b1a)
 
 여기서는 잘 나온다...
 
@@ -76,7 +76,7 @@ START TRANSACTION;
 UPDATE human SET look = 'so handsome' WHERE no=1;
 ```
 
-![](https://hackmd.io/_uploads/HkHjimfP3.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/1bf1cfa5-00e1-4e98-8a4c-53b51d02f6fd)
 
 이번에도 빙글빙글 돌아가고 안되고 있을 것이다.
 
@@ -96,7 +96,7 @@ UPDATE human SET look = '개 존 잘' WHERE no=1;
 SELECT * FROM human WHERE no=1;
 ```
 
-![](https://hackmd.io/_uploads/r1Y3hXMvh.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/8418435f-4269-4b1b-ac66-405980e3d26e)
 
 요렇게 나왔을 것이다.
 
@@ -110,7 +110,7 @@ COMMIT;
 
 ### Transaction 2 확인
 
-![](https://hackmd.io/_uploads/H11vpQGDn.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/4a19eb45-e9ab-401a-b67d-74f87a59c7ce)
 
 완료됐다.
 
@@ -120,7 +120,7 @@ COMMIT;
 SELECT * FROM human WHERE no=1;
 ```
 
-![](https://hackmd.io/_uploads/BkU96mMP2.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/de932a87-4f81-4698-bc03-8a397d42b41c)
 
 바꼈다!!
 
@@ -247,7 +247,7 @@ TRANSACTOIN;
 INSERT INTO human (no, name, look) values (24, 'ryoochan', '존잘그잡채');
 ```
 
-![](https://hackmd.io/_uploads/BJ3FoEfDh.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/fa5a8a14-1728-4e8a-b4f8-9b02bdbed7eb)
 
 ```
 INSERT INTO human (no, name, look) values (11, 'ryoochan', '존잘그잡채')	Error Code: 1213. Deadlock found when trying to get lock; try restarting transaction	0.154 sec
@@ -267,7 +267,7 @@ INSERT INTO human (no, name, look) values (11, 'ryoochan', '존잘그잡채')	Er
 
 실제로 한번 락을 확인해 보면
 
-![](https://hackmd.io/_uploads/HJ1geHfP2.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/36544a65-6580-4f7e-a6b2-abb3083f208f)
 
 요렇게 나온다.
 
@@ -278,7 +278,9 @@ INSERT INTO human (no, name, look) values (11, 'ryoochan', '존잘그잡채')	Er
 
 이녀석이 뭐냐면 
 
-![](https://hackmd.io/_uploads/rJ22eSfPn.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/ec3f4807-f630-452d-8dfd-8654165230e5)
+
+~~Thank you chatGPT!!~~
 
 간단하게 말해서 최대값이다.
 
