@@ -80,7 +80,7 @@ List<Apple> greenApples = filter(inventory, (Apple a) -> GREEN.equals(a.getColor
 함수 디스크립터는, 람다 표현식의 시그니처를 서술하는 메서드를 의미하는데, 예를 들어
 Runnable 인터페이스의 추상 메서드 `run`의 경우 
 
-![](https://hackmd.io/_uploads/B1_Ph0U92.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/6c85b326-01f2-4958-8e20-7fe8a64eb391)
 
 인수와 반환값이 없으므로
 
@@ -96,11 +96,12 @@ process(() -> System.out.println("류찬은 최고다!!"));
 와 같은 형태인데, 분명 표현식이 들어가야 했는데 왠지 구문이 들어갔다.
 대충 표현하자면
 
-![](https://hackmd.io/_uploads/S1JjT08c3.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/198d696e-8911-4a06-8bb9-df390bbe2283)
+
 
 이런 식인데, 이거 동작시키면
 
-![](https://hackmd.io/_uploads/HyhjaAU5h.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/b170baea-8fae-43dc-9fa2-a27583c8d550)
 
 잘 된다.
 
