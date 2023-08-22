@@ -68,7 +68,8 @@
 
 이전 글처럼 한번 hashmap의 put부터 살펴보자
 
-![](https://hackmd.io/_uploads/BkCPa1W6h.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/5e0f47a5-5e5c-487c-8881-abeacdd8e769)
+
 
 ```
 /**
@@ -180,7 +181,8 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 대충 이런 흐름이라고 이해하면 된다.
 근데 이제... 그래서 저거 linkedList랑 treeNode 둘을 어떻게 구분하고 바꾸는데?? 라는 의문이 들 수 있다.
 
-![](https://hackmd.io/_uploads/Bkx33Bf6n.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/1c2ec3eb-9209-4dfa-9461-c1f408a51ec0)
+
 
 요거 내용을 한번 보면
 
