@@ -67,7 +67,7 @@ ORDER BY created_at DESC
 LIMIT 10 OFFSET 0;
 ```
 
-![](https://hackmd.io/_uploads/HJCveIdg6.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/d4ba75df-3a4d-4b26-89d8-b3e87bed1bed)
 
 대충 이런 느낌일 것이다.
 다른 페이지를 보려고 한다면
@@ -78,7 +78,7 @@ ORDER BY created_at DESC
 LIMIT 10 OFFSET 10;
 ```
 
-![](https://hackmd.io/_uploads/ryiugI_eT.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/4542f32c-de5e-43e1-a8f9-ce186cc78463)
 
 이렇게 가져올 수 있겠지
 
@@ -93,7 +93,7 @@ ORDER BY heart DESC, created_at DESC
 LIMIT 10 OFFSET 0;
 ```
 
-![](https://hackmd.io/_uploads/r1xixL_g6.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/d8305867-d593-43a3-9291-330bf977da19)
 
 이것도 쉽다.
 보면 좋아요 순서대로 나오고, 같은 경우 다른걸 찾아올 수 있는게 보인다.
@@ -143,7 +143,7 @@ ORDER BY heart DESC, created_at DESC
 LIMIT 10 OFFSET 0;
 ```
 
-![](https://hackmd.io/_uploads/Skm3lL_x6.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/96d91cdf-8810-499f-8ca2-013d92a8a268)
 
 이제 다음으로 11 ~ 20 데이터를 가져오겠다.
 
@@ -153,19 +153,19 @@ ORDER BY heart DESC, created_at DESC
 LIMIT 10 OFFSET 10;
 ```
 
-![](https://hackmd.io/_uploads/r11pe8OeT.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/0401747d-ebc6-4e10-b666-620974387a70)
 
 가져와 졌다.
 
 그럼 이번에는 한번 8001 ~ 8010의 데이터를 가져와 보자
 
-![](https://hackmd.io/_uploads/B1NkbIdx6.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/ce691498-d621-4e3f-9c88-3c3559518d7b)
 
 잘 가져와 지는 것 같다.
 
 그런데 한번 가져오는 속도를 확인해 보자
 
-![](https://hackmd.io/_uploads/H1TLW8dea.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/55b74c2a-05a4-4b80-bdbe-372cb64c699e)
 
 * 0개부터 
     * 0.011초
@@ -213,18 +213,18 @@ LIMIT 10;
 이렇게 하는 것이다.
 이러면 좋은점은
 
-![](https://hackmd.io/_uploads/HyHqz8Og6.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/7fd25c48-c6a0-479a-a0fe-e08a3d909852)
 
 잘 가져와지고
 
-![](https://hackmd.io/_uploads/r1IozU_la.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/e3b08d9f-3aa7-4f84-80e5-e043ef9c9b21)
 
 이전 데이터 말고 원하는 값을 가져오기 때문에 offset limit보다 훨씬 속도가 빠르게 나온다.
 그리고 이거의 또 하나 좋은점은
 
 현재 방식의 실행계획을 확인해 보면
 
-![](https://hackmd.io/_uploads/rJkkXUOea.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/55fb9c0c-dd5f-404f-ad70-7400d8cc5174)
 
 일단 아무런 인덱스도 없고, 원하는 값을 가져오지 않는 것을 볼 수 있는데,
 
@@ -234,12 +234,12 @@ CREATE INDEX idx_heart_created_at ON board (heart DESC, created_at DESC);
 
 다음과 같이 오더링에 쓰이는 `heart`, `created_at`의 복합 인덱스를 구성하면
 
-![](https://hackmd.io/_uploads/rySN7LdlT.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/c6b0f50a-df2a-472f-b25f-f2b7d03dd9b9)
 
 쓰이지 않는 데이터를 완벽히 필더링하고 인덱스를 제대로 탈 수 있도록 만들 수 있다.
 그러면 이전보다 훨씬 빠르게 확인할 수도 있다.
 
-![](https://hackmd.io/_uploads/rywvE8Oxa.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/9a8aa222-8bba-4d71-a5cf-434fecb9e3c0)
 
 이렇게 말이다.
 
@@ -252,7 +252,7 @@ ORDER BY heart DESC, created_at DESC
 LIMIT 10 OFFSET 8005;
 ```
 
-![](https://hackmd.io/_uploads/H1TWV8dgp.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/c42901e5-a7c2-4626-9c75-b585bd671820)
 
 
 ```
@@ -267,9 +267,9 @@ ORDER BY heart DESC, created_at DESC
 limit 10;
 ```
 
-![](https://hackmd.io/_uploads/HJDGVUul6.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/9431def6-e047-4457-ac57-354839456d5e)
 
-![](https://hackmd.io/_uploads/BJjd4I_lT.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/5060427c-ee81-47cd-99b3-f7a1987fb2be)
 
 같은 데이터를 보는데, 정말 비교도 안되게 빠른 속도로 데이터를 찾아올 수 있게 된다.
 
