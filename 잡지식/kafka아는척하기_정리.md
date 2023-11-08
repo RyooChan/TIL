@@ -3,7 +3,7 @@
 
 ## 기본 모양
 
-![image.png](https://hackmd.io/_uploads/HJoxL1YQT.png)
+![image](https://github.com/RyooChan/TIL/assets/53744363/4480804b-e3c2-4753-87b0-96c25a222eb8)
 
 * 카프카 클러스터
     * 메세지를 저장하는 저장소
