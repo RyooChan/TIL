@@ -42,7 +42,7 @@ public class Main {
 
 요런 식으로 돌려보면 어떻게 나올까?
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/49a784e3-39b0-4ed1-ab9a-37c0c7b18bbd/40f20b56-f0d1-49d2-8184-cab315a58de7/image.png)
+![image](https://github.com/user-attachments/assets/fa5e8113-8f94-4484-b1ef-62a873be92c5)
 
 이와 같이 나온다.
 
@@ -170,7 +170,7 @@ Since:
 
 아마 다들 뻔하다고 생각하겠지만
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/49a784e3-39b0-4ed1-ab9a-37c0c7b18bbd/97f36f10-0dfe-4445-97f2-3fec37287c2f/image.png)
+![image](https://github.com/user-attachments/assets/22c5c406-b803-42d4-86db-088081eefa5d)
 
 ㅇㅇ true 가 나온다.
 
